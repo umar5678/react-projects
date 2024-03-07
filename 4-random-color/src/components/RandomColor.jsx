@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const RandomColor = () => {
   const [bgColor, setBgColor] = useState("#fff");
 
-  function randomHex(lenght) {
-    return Math.floor(Math.random() * lenght);
+  function randomHex(length) {
+    return Math.floor(Math.random() * length);
   }
 
   function changeBgColor() {
