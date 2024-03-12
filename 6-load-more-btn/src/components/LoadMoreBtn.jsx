@@ -4,6 +4,7 @@ const LoadMoreBtn = () => {
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);
   const [count, setCount] = useState(0);
+  const [disableBtn, setDisableBtn] = useState(false);
 
   async function fetchProducts() {
     try {
@@ -27,6 +28,12 @@ const LoadMoreBtn = () => {
   useEffect(() => {
     fetchProducts();
   }, [count]);
+
+  useEffect(() => {
+    if (products && products.length === 100) {
+      setDisableBtn(true);
+    }
+  }, [products]);
 
   if (loading) {
     return (
@@ -72,8 +79,9 @@ const LoadMoreBtn = () => {
       <button
         className="px-4 py-3 bg-emerald-500 hover:bg-white hover:text-emerald-500 transition-colors w-max  rounded-lg text-white font-bold mb-10 "
         onClick={() => setCount(count + 1)}
+        disabled={disableBtn}
       >
-        Load More
+        {disableBtn ? "No more products" : "Load More"}
       </button>
     </div>
   );
